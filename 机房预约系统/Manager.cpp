@@ -1,6 +1,4 @@
 #include "Manager.h"
-#include "globalFile.h"
-#include <fstream>
 
 Manager::Manager() {
 
@@ -11,6 +9,20 @@ Manager::Manager(string name, string pwd) {
 	this->m_Pwd = pwd;
 
 	this->initVector();
+
+	// 获取机房信息
+	ifstream ifs;
+
+	ifs.open(COMPUTER_FILE, ios::in);
+
+	ComputerRoom c;
+	while (ifs >> c.m_ComId && ifs >> c.m_MaxNum)
+	{
+		vCom.push_back(c);
+	}
+	cout << "当前机房数量为：" << vCom.size() << endl;
+
+	ifs.close();
 }
 
 void Manager::openMenu() {
@@ -99,19 +111,55 @@ void Manager::addPerson() {
 	this->initVector();
 }
 
+void printStudent(Student& s) {
+	cout << "学号：" << s.m_Id << " 姓名：" << s.m_Name << " 密码：" << s.m_Pwd << endl;
+}
+
+void printTeacher(Teacher& t) {
+	cout << "职工号： " << t.m_EmpId << " 姓名： " << t.m_Name << " 密码：" << t.m_Pwd << endl;
+}
+
 // 查看账号
 void Manager::showPerson() {
+	cout << "请选择查看内容：" << endl;
+	cout << "1、查看所有学生" << endl;
+	cout << "2、查看所有老师" << endl;
 
+	int select = 0;
+
+	cin >> select;
+
+	if (select == 1)
+	{
+		cout << "所有学生信息如下： " << endl;
+		for_each(vStu.begin(), vStu.end(), printStudent);
+	}
+	else
+	{
+		cout << "所有老师信息如下： " << endl;
+		for_each(vTea.begin(), vTea.end(), printTeacher);
+	}
 }
 
 // 查看机房信息
 void Manager::showComputer() {
+	cout << "所有机房信息如下： " << endl;
+	for (vector<ComputerRoom>::iterator it = vCom.begin(); it != vCom.end(); it++) {
+		cout << "机房编号：" << it->m_ComId << " 机房最大人数：" << it->m_MaxNum << endl;
+	}
 
+	system("pause");
+	system("cls");
 }
 
 // 清空预约记录
 void Manager::cleanFile() {
+	ofstream ofs(ORDER_FILE, ios::trunc);
+	ofs.close();
 
+	cout << "清空所有预约成功！" << endl;
+	system("pause");
+	system("cls");
 }
 
 //检测是否有id重复

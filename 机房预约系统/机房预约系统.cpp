@@ -8,6 +8,40 @@
 #include <iostream>
 using namespace std;
 
+void studentMenu(Identity*& student) {
+	while (true)
+	{
+		student->openMenu();
+		Student* stu = (Student*)student;
+		int select = 0;
+
+		cin >> select;
+
+		if (select == 1) // 申请预约
+		{
+			stu->applyOrder();
+		}
+		else if (select == 2) { // 查看自己的预约
+			stu->showMyOrder();
+		}
+		else if (select == 3) // 查看所有预约
+		{
+			stu->showAllOrder();
+		}
+		else if (select == 4)
+		{
+			stu->cancelOrder();
+		}
+		else
+		{
+			delete student;
+			cout << "注销成功" << endl;
+			system("pause");
+			system("cls");
+			return;
+		}
+	}
+}
 
 // 管理员菜单
 void managerMenu(Identity*& manager) {
@@ -102,6 +136,8 @@ void LoginIn(string fileName, int type) {
 				system("cls");
 				person = new Student(id, name, pwd);
 
+				// 进入学生菜单
+				studentMenu(person);
 				return;
 			}
 		}

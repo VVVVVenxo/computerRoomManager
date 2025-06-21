@@ -1,9 +1,13 @@
 #pragma once
+using namespace std;
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <algorithm>
+#include "globalFile.h"
 #include "Student.h"
 #include "Teacher.h"
-using namespace std;
+#include "computerRoom.h"
 #include "Identity.h"
 
 class Manager :public Identity
@@ -38,5 +42,8 @@ public:
 
 	// 教师容器
 	vector<Teacher> vTea;
+
+	// 机房容器
+	vector<ComputerRoom> vCom;
 };
 
