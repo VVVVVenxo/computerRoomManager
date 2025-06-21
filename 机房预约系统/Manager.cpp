@@ -8,6 +8,7 @@ Manager::Manager(string name, string pwd) {
 	this->m_Name = name;
 	this->m_Pwd = pwd;
 
+	// 初始化容器
 	this->initVector();
 
 	// 获取机房信息
@@ -139,6 +140,9 @@ void Manager::showPerson() {
 		cout << "所有老师信息如下： " << endl;
 		for_each(vTea.begin(), vTea.end(), printTeacher);
 	}
+
+	system("pause");
+	system("cls");
 }
 
 // 查看机房信息
