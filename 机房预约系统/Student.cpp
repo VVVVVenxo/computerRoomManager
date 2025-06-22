@@ -135,8 +135,20 @@ void Student::showMyOrder() {
 			{
 				status += "预约成功";
 			}
+			else if (of.m_orderData[i]["status"] == "-1")
+			{
+				status += "审核未通过，预约失败";
+			}
+			else {
+				status += "预约已取消";
+			}
+
+			cout << status << endl;
 		}
 	}
+
+	system("pause");
+	system("cls");
 	
 }
 
