@@ -1,8 +1,14 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
 using namespace std;
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include "OrderFIle.h"
 #include "Identity.h"
+#include"globalFile.h"
+#include "computerRoom.h"
+
 
 class Teacher : public Identity
 {

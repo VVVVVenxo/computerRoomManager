@@ -8,6 +8,7 @@
 #include <iostream>
 using namespace std;
 
+// 学生菜单
 void studentMenu(Identity*& student) {
 	while (true)
 	{
@@ -35,6 +36,36 @@ void studentMenu(Identity*& student) {
 		else
 		{
 			delete student;
+			cout << "注销成功" << endl;
+			system("pause");
+			system("cls");
+			return;
+		}
+	}
+}
+
+// 教师菜单
+void TeacherMenu(Identity*& teacher) {
+	while (true)
+	{
+		// 教师菜单
+		teacher->openMenu();
+
+		Teacher* tea = (Teacher*)teacher;
+		int select = 0;
+
+		cin >> select;
+
+		if (select == 1)
+		{
+			tea->showAllOrder();
+		}
+		else if (select == 2) {
+			tea->validOrder();
+		}
+		else
+		{
+			delete teacher;
 			cout << "注销成功" << endl;
 			system("pause");
 			system("cls");
@@ -157,6 +188,9 @@ void LoginIn(string fileName, int type) {
 				system("pause");
 				system("cls");
 				person = new Teacher(id, name, pwd);
+
+				// 进入教师菜单
+				TeacherMenu(person);
 
 				return;
 			}
